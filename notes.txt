@@ -1,0 +1,157 @@
+/////////////////////////////////////////////////////////////////// CASE 1
+{
+    0: [a...z]
+    1: [a...z]
+    2: [a...z]
+    3: [a...z]
+    4: [a...z]
+}
+
+guess:  alpha
+answer: bland
+First a would be yellow, second would be grey
+l would be green
+
+{
+    0: [b...g, i...o, q...z] //remove a, h, p
+    1: [l] //only l remains since it's green
+    2: [a...g, i...o, q...z]
+    3: [a...g, i...o, q...z]
+    4: [b...z] // remove a
+}
+
+modify array values one case at a time
+
+do greens first
+the letter has to match and whether there are more of that letter doesn't matter yet
+{
+    0: [a...z]
+    1: [l] // remove all elements except the single element
+    2: [a...z]
+    3: [a...z]
+    4: [a...z]
+}
+
+do yellows next
+if a letter is yellow, it can be removed from the array for that index
+{
+    0: [b...z] // remove the single element
+    1: [l]
+    2: [a...z]
+    3: [a...z]
+    4: [a...z]
+}
+
+do greys for their indices
+we know that each grey letter cannot exist at that index
+{
+    0: [b...z]
+    1: [l]
+    2: [a...o, q...z] // remove the single element
+    3: [a...g, i...z] // remove the single element
+    4: [b...z] // remove the single element
+}
+
+if all instances of a letter are grey, then it can't be in the answer and should be removed from any array in which it still appears
+{
+    0: [b...g, i...o, q...z] // remove h and p
+    1: [l]
+    2: [a...g, i...o, q...z] // remove h
+    3: [a...g, i...o, q...z] // remove p
+    4: [b...g, i...o, q...z] // remove h and p
+}
+
+
+/////////////////////////////////////////////////////////////////// CASE 2
+{
+    0: [a...z]
+    1: [a...z]
+    2: [a...z]
+    3: [a...z]
+    4: [a...z]
+}
+
+first guess:  alpha
+answer: again
+
+a: green
+l: grey
+p: grey
+h: grey
+a: yellow
+
+do greens first
+{
+    0: [a] // a is green, so all elements except this one are removed
+    1: [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
+    2: [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
+    3: [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
+    4: [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
+}
+
+do yellows next
+{
+    0: [a]
+    1: [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
+    2: [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
+    3: [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
+    4: [b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z] // a is yellow in this position, so it can removed from the array
+}
+
+do greys for their indices
+{
+    0: [a]
+    1: [a, b, c, d, e, f, g, h, i, j, k, m, n, o, p, q, r, s, t, u, v, w, x, y, z] // l is removed at this position
+    2: [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, q, r, s, t, u, v, w, x, y, z] // p is removed at this position
+    3: [a, b, c, d, e, f, g, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z] // h is removed at this position
+    4: [b...z]
+}
+
+if a letter is grey and only appears once in the guess, then it can't be in the answer and should be removed from any array in which it still appears
+grey letters appearing only once in guess: [ l ,p ,h ]
+{
+    0: [a]
+    1: [a, b, c, d, e, f, g, i, j, k, m, n, o, q, r, s, t, u, v, w, x, y, z] // remove h, p
+    2: [a, b, c, d, e, f, g, i, j, k, m, n, o, q, r, s, t, u, v, w, x, y, z] // remove l, h
+    3: [a, b, c, d, e, f, g, i, j, k, m, n, o, q, r, s, t, u, v, w, x, y, z] // remove l, p
+    4: [b, c, d, e, f, g, i, j, k, m, n, o, q, r, s, t, u, v, w, x, y, z] // remove l, h, p
+}
+
+second guess:  gains
+answer: again
+
+g: yellow
+a: yellow
+i: yellow
+n: yellow
+s: grey
+
+do greens first
+there aren't any, so nothing changes
+{
+    0: [a]
+    1: [a, b, c, d, e, f, g, i, j, k, m, n, o, q, r, s, t, u, v, w, x, y, z] 
+    2: [a, b, c, d, e, f, g, i, j, k, m, n, o, q, r, s, t, u, v, w, x, y, z] 
+    3: [a, b, c, d, e, f, g, i, j, k, m, n, o, q, r, s, t, u, v, w, x, y, z] 
+    4: [b, c, d, e, f, g, i, j, k, m, n, o, q, r, s, t, u, v, w, x, y, z] 
+}
+
+do yellows next
+{
+    0: [a] 
+    1: [b, c, d, e, f, g, i, j, k, m, n, o, q, r, s, t, u, v, w, x, y, z] // remove a
+    2: [a, b, c, d, e, f, g, j, k, m, n, o, q, r, s, t, u, v, w, x, y, z] // remove i
+    3: [a, b, c, d, e, f, g, i, j, k, m, o, q, r, s, t, u, v, w, x, y, z] // remove n
+    4: [b, c, d, e, f, g, i, j, k, m, n, o, q, r, t, u, v, w, x, y, z] // remove s
+}
+
+if a letter is grey and only appears once in the guess, then it can't be in the answer and should be removed from any array in which it still appears
+grey letters appearing only once in guess: [ s ]
+
+{
+    0: [a] // nothing changes since s already isn't in the array
+    1: [b, c, d, e, f, g, i, j, k, m, n, o, q, r, t, u, v, w, x, y, z] // remove s
+    2: [a, b, c, d, e, f, g, j, k, m, n, o, q, r, t, u, v, w, x, y, z] // remove s
+    3: [a, b, c, d, e, f, g, i, j, k, m, o, q, r, t, u, v, w, x, y, z] // remove s
+    4: [b, c, d, e, f, g, i, j, k, m, n, o, q, r, t, u, v, w, x, y, z] // nothing changes since s already isn't in the array
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Hello Wordle</h1>
+
+    <form>
+      <label for="guess-input">Guess</label>
+      <input class="guess-input" id="guess-input" type="text" />
+      <label for="guess-index-0">0</label>
+      <input class="color-input" id="guess-index-0" type="text" />
+      <label for="guess-index-1">1</label>
+      <input class="color-input" id="guess-index-1" type="text" />
+      <label for="guess-index-2">2</label>
+      <input class="color-input" id="guess-index-2" type="text" />
+      <label for="guess-index-3">3</label>
+      <input class="color-input" id="guess-index-3" type="text" />
+      <label for="guess-index-4">4</label>
+      <input class="color-input" id="guess-index-4" type="text" />
+      <button type="button" onclick="bestNextGuesses()">Submit</button>
+    </form>
+
+    <div><h3 id="suggested-word-1"></h3></div>
+    <div><h3>Answer Possibilities:</h3></div>
+    <div><h4 id="total-possibilities"></h4></div>
+    <div id="guess-1"></div>
+    <div id="guess-2"></div>
+    <div id="guess-3"></div>
+    <div id="guess-4"></div>
+    <div id="guess-5"></div>
+    <div><h5 id="index0-possibilities"></h5></div>
+    <div><h5 id="index1-possibilities"></h5></div>
+    <div><h5 id="index2-possibilities"></h5></div>
+    <div><h5 id="index3-possibilities"></h5></div>
+    <div><h5 id="index4-possibilities"></h5></div>
+    <div><h5 id="word-list"></h5></div>
+
+    <script type="text/javascript" src="./words.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+  </body>
+</html>
