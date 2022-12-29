@@ -188,13 +188,10 @@ function removeGreyFromAllIndices(guess, guessColors) {
     for (let ii = 0; ii < 5; ii++) {
       if (guess[i] === guess[ii]) {
         if (guessColors[ii] !== 2) greyCount += Number(guessColors[ii])
-        // console.log(guess[i], greyCount)
       }
     }
     if (greyCount === 0) {
       for (let iii = 0; iii < 5; iii++) {
-        // console.log(answerPossibilities[iii])
-        // console.log(answerPossibilities[iii].filter((e) => e != guess[i]))
         if (answerPossibilities[iii].length != 1) {
           answerPossibilities[iii] = answerPossibilities[iii].filter((e) => e != guess[i])
         }
