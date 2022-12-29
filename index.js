@@ -186,6 +186,7 @@ function removeGreyFromAllIndices(guess, guessColors) {
   for (let i = 0; i < 5; i++) {
     let greyCount = 0
     for (let ii = 0; ii < 5; ii++) {
+      greyCount = 0
       if (guess[i] === guess[ii]) {
         if (guessColors[ii] !== 2) greyCount += Number(guessColors[ii])
       }
