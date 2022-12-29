@@ -186,15 +186,15 @@ function removeGreyFromAllIndices(guess, guessColors) {
   for (let i = 0; i < 5; i++) {
     let greyCount = 0
     for (let ii = 0; ii < 5; ii++) {
-      greyCount = 0
+    //   greyCount = 0
       if (guess[i] === guess[ii]) {
         if (guessColors[ii] !== 2) greyCount += Number(guessColors[ii])
-      }
-    }
-    if (greyCount === 0) {
-      for (let iii = 0; iii < 5; iii++) {
-        if (answerPossibilities[iii].length != 1) {
-          answerPossibilities[iii] = answerPossibilities[iii].filter((e) => e != guess[i])
+        if (greyCount === 0) {
+          for (let iii = 0; iii < 5; iii++) {
+            if (answerPossibilities[iii].length != 1) {
+              answerPossibilities[iii] = answerPossibilities[iii].filter((e) => e != guess[i])
+            }
+          }
         }
       }
     }
