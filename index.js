@@ -110,11 +110,13 @@ let answerPossibilities = {
 
 function bestNextGuesses() {
   const guessInput = document.getElementById("guess-input")
+  const guessInputValueLowercase = guessInput.value.toLowerCase()
 
-  processGreens(guessInput.value, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
-  processYellows(guessInput.value, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
-  processGreys(guessInput.value, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
-  removeGreyFromAllIndices(guessInput.value, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
+  processGreens(guessInputValueLowercase, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
+  processYellows(guessInputValueLowercase, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
+  processGreys(guessInputValueLowercase, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
+  //removeGreyFromAllIndices(guessInput.value, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
+  removeWordsWithMoreThanMaxAmountOfLetters(guessInputValueLowercase, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
 
   filterWordList()
   wordListElement.innerHTML = filteredWordList.join(", ")
@@ -182,23 +184,45 @@ function processGreys(guess, guessColors) {
   }
 }
 
+/////////////////////////////remove?
 function removeGreyFromAllIndices(guess, guessColors) {
   for (let i = 0; i < 5; i++) {
     let greyCount = 0
     for (let ii = 0; ii < 5; ii++) {
-    //   greyCount = 0
       if (guess[i] === guess[ii]) {
         if (guessColors[ii] !== 2) greyCount += Number(guessColors[ii])
         if (greyCount === 0) {
           for (let iii = 0; iii < 5; iii++) {
             if (answerPossibilities[iii].length != 1) {
-              answerPossibilities[iii] = answerPossibilities[iii].filter((e) => e != guess[i])
+              answerPossibilities[iii] = answerPossibilities[iii].filter((e) => e != guess[ii])
             }
           }
         }
       }
     }
   }
+}
+
+function removeWordsWithMoreThanMaxAmountOfLetters(guess, guessColors) {
+  let nonGreyMap = {}
+  for (let i = 0; i < 5; i++) {
+    let nonGreyCount = 0
+    if (guessColors[i] == 0) {
+      for (let ii = 0; ii < 5; ii++) {
+        if (guessColors[ii] !== 0 && guess[i] === guess[ii] && i !== ii) {
+          nonGreyCount++
+        }
+      }
+      if (nonGreyCount > 0) nonGreyMap[guess[i]] = nonGreyCount
+    }
+  }
+  console.log(filteredWordList.length, 1)
+
+  for (key in nonGreyMap) {
+    console.log(`key: ${key}, nonGreyMap[key]: ${typeof nonGreyMap[key]}`)
+    filteredWordList = filteredWordList.filter((word) => word.split('').filter((letter) => letter === key).length <= nonGreyMap[key])
+  }
+  console.log(filteredWordList.length, 2)
 }
 
 function filterWordList() {
