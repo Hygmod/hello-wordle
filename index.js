@@ -115,7 +115,7 @@ function bestNextGuesses() {
   processGreens(guessInputValueLowercase, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
   processYellows(guessInputValueLowercase, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
   processGreys(guessInputValueLowercase, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
-  removeGreyFromAllIndices(guessInput.value, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
+  removeGreyFromAllIndices(guessInputValueLowercase, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
   removeWordsWithMoreThanMaxAmountOfLetters(guessInputValueLowercase, [guessIndex0.value, guessIndex1.value, guessIndex2.value, guessIndex3.value, guessIndex4.value])
 
   filterWordList()
