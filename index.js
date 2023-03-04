@@ -30,6 +30,8 @@ const guess2Index2 = document.getElementById("guess-2-index-2")
 const guess2Index3 = document.getElementById("guess-2-index-3")
 const guess2Index4 = document.getElementById("guess-2-index-4")
 
+const submitGuess = document.getElementById("submit-guess")
+
 guessIndex0.addEventListener("input", (e) => {
   if (e.data == 0) {
     e.target.classList.toggle("guess-index-color-grey", e.target.value)
@@ -42,6 +44,7 @@ guessIndex0.addEventListener("input", (e) => {
     e.target.classList.remove("guess-index-color-yellow")
     e.target.classList.remove("guess-index-color-green")
   }
+  guessIndex1.focus()
 })
 
 guessIndex1.addEventListener("input", (e) => {
@@ -56,6 +59,7 @@ guessIndex1.addEventListener("input", (e) => {
     e.target.classList.remove("guess-index-color-yellow")
     e.target.classList.remove("guess-index-color-green")
   }
+  guessIndex2.focus()
 })
 
 guessIndex2.addEventListener("input", (e) => {
@@ -70,6 +74,7 @@ guessIndex2.addEventListener("input", (e) => {
     e.target.classList.remove("guess-index-color-yellow")
     e.target.classList.remove("guess-index-color-green")
   }
+  guessIndex3.focus()
 })
 
 guessIndex3.addEventListener("input", (e) => {
@@ -84,6 +89,7 @@ guessIndex3.addEventListener("input", (e) => {
     e.target.classList.remove("guess-index-color-yellow")
     e.target.classList.remove("guess-index-color-green")
   }
+  guessIndex4.focus()
 })
 
 guessIndex4.addEventListener("input", (e) => {
@@ -98,6 +104,7 @@ guessIndex4.addEventListener("input", (e) => {
     e.target.classList.remove("guess-index-color-yellow")
     e.target.classList.remove("guess-index-color-green")
   }
+  submitGuess.focus()
 })
 
 let answerPossibilities = {
@@ -189,8 +196,11 @@ function removeGreyFromAllIndices(guess, guessColors) {
   for (let i = 0; i < 5; i++) {
     let greyCount = 0
     for (let ii = 0; ii < 5; ii++) {
+      //if the letter of the loop and subloop are the same
       if (guess[i] === guess[ii]) {
+
         if (guessColors[ii] !== 2) greyCount += Number(guessColors[ii])
+        // greyCount += Number(guessColors[ii])
         if (greyCount === 0) {
           for (let iii = 0; iii < 5; iii++) {
             if (answerPossibilities[iii].length != 1) {
@@ -219,7 +229,7 @@ function removeWordsWithMoreThanMaxAmountOfLetters(guess, guessColors) {
   console.log(filteredWordList.length, 1)
 
   for (key in nonGreyMap) {
-    console.log(`key: ${key}, nonGreyMap[key]: ${typeof nonGreyMap[key]}`)
+    console.log(`key: ${key}, nonGreyMap[key]: ${nonGreyMap[key]}`)
     filteredWordList = filteredWordList.filter((word) => word.split('').filter((letter) => letter === key).length <= nonGreyMap[key])
   }
   console.log(filteredWordList.length, 2)
